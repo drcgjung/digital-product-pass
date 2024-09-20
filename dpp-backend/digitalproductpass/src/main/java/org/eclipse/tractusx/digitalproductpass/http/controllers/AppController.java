@@ -275,20 +275,20 @@ public class AppController {
         if (endpointData == null) {
             throw new ControllerException(this.getClass().getName(), "The endpoint data request is empty!");
         }
-        if (endpointData.getEndpoint().isEmpty()) {
+        if (endpointData.getEndpoint() == null || endpointData.getEndpoint().isEmpty()) {
             throw new ControllerException(this.getClass().getName(), "The data plane endpoint address is empty!");
         }
-        if (endpointData.getAuthCode().isEmpty()) {
+        if (endpointData.getAuthCode() == null || endpointData.getAuthCode().isEmpty()) {
             throw new ControllerException(this.getClass().getName(), "The authorization code is empty!");
         }
-        if (endpointData.getContractId().isEmpty() && !endpointData.offerIdExists()) {
+        if ((endpointData.getContractId() == null || endpointData.getContractId().isEmpty()) && !endpointData.offerIdExists()) {
             Jwt token = httpUtil.parseToken(endpointData.getAuthCode());
             if (!token.getPayload().containsKey("cid") || token.getPayload().get("cid").equals("")) {
                 throw new ControllerException(this.getClass().getName(), "The Offer Id is empty!");
             }
             return endpointData;
         }
-        if (endpointData.getContractId().isEmpty()) {
+        if (endpointData.getContractId() == null || endpointData.getContractId().isEmpty()) {
             throw new ControllerException(this.getClass().getName(), "The contractId is empty!");
         }
         return endpointData;
