@@ -40,6 +40,9 @@ backend:
   # -- Existing image pull secret to use to [obtain the container image from private registries](https://kubernetes.io/docs/concepts/containers/images/#using-a-private-registry)
   imagePullSecrets: []
 
+  # -- Whether to enable debugging
+  debug: false
+
   service:
     # -- [Service type](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types) to expose the running application on a set of Pods as a network service
     type: ClusterIP
@@ -140,7 +143,7 @@ backend:
     hostname: ""
     apis:
       readiness: "/api/check/readiness"
-      management: "/management/v2"
+      management: "/data/v2"
       catalog: "/catalog/request"
       negotiation: "/contractnegotiations"
       transfer: "/transferprocesses"
@@ -179,11 +182,13 @@ backend:
     encryptionKey: ""
 
   passport:
+    encrypt: false
     aspects:
       - "urn:bamm:io.catenax.generic.digital_product_passport:1.0.0#DigitalProductPassport"
       - "urn:bamm:io.catenax.battery.battery_pass:3.0.1#BatteryPass"
       - "urn:bamm:io.catenax.transmission.transmission_pass:1.0.0#TransmissionPass"
       - "urn:samm:io.catenax.generic.digital_product_passport:2.0.0#DigitalProductPassport"
+      - "urn:bamm:io.catenax.battery.battery_pass:4.0.0#BatteryPass"
 
   digitalTwinRegistry:
     endpoints:
@@ -198,7 +203,7 @@ backend:
       digitalTwin: 40
     # -- temporary storage of dDTRs for optimization
     temporaryStorage:
-      enabled: true
+      enabled: false
       # -- lifetime of the temporaryStorage in hours
       lifetime: 12
 

@@ -79,11 +79,18 @@ spec:
                 secretKeyRef:
                   key:  participantId
                   name: {{ .Release.Name }}-avp-consumer-backend-edc-oauth
+            {{- if .Values.backend.debug }}
+            - name: "JAVA_TOOL_OPTIONS"
+              value: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:4041"
+            {{- end }}
           volumeMounts:
             {{- toYaml .Values.backend.volumeMounts | nindent 12 }}
           ports:
             - containerPort: 8888
               name: http
+              protocol: TCP
+            - containerPort: 4041
+              name: debug
               protocol: TCP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

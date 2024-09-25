@@ -131,7 +131,7 @@ data:
         # -- configure the data transfer
         dataTransfer:
           # -- encrypt the passport when he arrives from the edc data plane
-          encrypt: true
+          encrypt: {{ .Values.backend.passport.encrypt | default true }} 
           # -- the indent from the passport
           indent: true
           # -- directory to store the passport when is not linked to a process
