@@ -35,7 +35,8 @@ fullnameOverride: ""
 backend:
   name: "dpp-backend"
   image:
-    repository: docker.io/tractusx/digital-product-pass-backend
+    repository: ghcr.io/big-data-spaces/digital-product-pass/digital-product-pass-backend
+    tag: 2.3.0-patched
     pullPolicy: Always
   # -- Existing image pull secret to use to [obtain the container image from private registries](https://kubernetes.io/docs/concepts/containers/images/#using-a-private-registry)
   imagePullSecrets: []
