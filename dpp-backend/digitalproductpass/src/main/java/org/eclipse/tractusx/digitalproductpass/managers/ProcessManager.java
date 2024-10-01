@@ -1213,7 +1213,7 @@ public class ProcessManager {
      */
     public String saveProcessPayload(String processId, Object payload, String fileName, Long startedTime, String assetId, String status, String eventKey) {
         try {
-            Boolean encrypt = env.getProperty("passport.dataTransfer.encrypt", Boolean.class, true);
+            Boolean encrypt = env.getProperty("configuration.passport.dataTransfer.encrypt", Boolean.class, true);
             // Define history
             History history = new History(
                     assetId,
@@ -1496,7 +1496,7 @@ public class ProcessManager {
                 throw new ManagerException(this.getClass().getName(), "Passport file ["+path+"] not found!");
             }
             JsonNode passport = null;
-            Boolean encrypt = env.getProperty("passport.dataTransfer.encrypt", Boolean.class, true);
+            Boolean encrypt = env.getProperty("configuration.passport.dataTransfer.encrypt", Boolean.class, true);
             if(encrypt){
                 Status status = this.getStatus(processId);
                 History negotiationHistory = status.getHistory("negotiation-accepted");
@@ -1547,8 +1547,8 @@ public class ProcessManager {
     public String savePassport(String processId, EndpointDataReference endpointData, JsonNode passport) {
         try {
             // Retrieve the configuration
-            Boolean prettyPrint = env.getProperty("passport.dataTransfer.indent", Boolean.class, true);
-            Boolean encrypt = env.getProperty("passport.dataTransfer.encrypt", Boolean.class, true);
+            Boolean prettyPrint = env.getProperty("configuration.passport.dataTransfer.indent", Boolean.class, true);
+            Boolean encrypt = env.getProperty("configuration.passport.dataTransfer.encrypt", Boolean.class, true);
 
             Object passportContent = passport;
             Status status = getStatus(processId);
