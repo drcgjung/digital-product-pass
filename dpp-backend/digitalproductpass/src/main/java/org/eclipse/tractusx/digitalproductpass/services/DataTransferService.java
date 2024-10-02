@@ -1139,7 +1139,7 @@ public class DataTransferService extends BaseService {
          */
         public TransferRequest buildTransferRequest(Dataset dataset, Status status, Negotiation negotiation, String bpn) {
             try {
-                String receiverEndpoint = String.format(env.getProperty("configuration.edc.receiverEndpoint"),this.processId,""); // Send process Id to identification the session.
+                String receiverEndpoint = env.getProperty("configuration.edc.receiverEndpoint") + "/" + this.processId; // Send process Id to identification the session.
                 TransferRequest.TransferType transferType = new TransferRequest.TransferType();
 
                 transferType.setContentType(env.getProperty("configuration.edc.transferType"));
@@ -1412,7 +1412,7 @@ public class DataTransferService extends BaseService {
         public TransferRequest buildTransferRequest(String processId, Dtr dtr, String endpointId) {
             try {
                 // Build transfer request to make the Digital Twin Query
-                String receiverEndpoint = String.format(env.getProperty("configuration.edc.receiverEndpoint"),processId,endpointId);
+                String receiverEndpoint = env.getProperty("configuration.edc.receiverEndpoint") + "/" + processId +  "/" + endpointId;
                 TransferRequest.TransferType transferType = new TransferRequest.TransferType();
 
                 transferType.setContentType(env.getProperty("configuration.edc.transferType"));
